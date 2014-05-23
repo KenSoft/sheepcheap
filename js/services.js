@@ -49,7 +49,7 @@ angular.module('starter.services', [])
             console.log(q);
             $http({
             method: 'GET',
-                url:'https://api.parse.com/1/classes/telephone?where='+encodeURIComponent('{"name" : { "\$regex" : ".*'+q+'.*" } }'),
+                url:'https://api.parse.com/1/classes/products?where='+encodeURIComponent('{"productName" : { "\$regex" : ".*'+q+'.*" } }'),
                 headers:
                 {
                     'X-Parse-Application-Id': app_id,
