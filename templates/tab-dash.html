@@ -1,0 +1,29 @@
+<ion-view title="Home">
+  <ion-content>
+   <div class="welcomevertical">
+<font face="Ubuntu" color="#FFFFFF" size="5">
+Welcome to Sheep
+
+</font>
+
+</div>
+<font face="Ubuntu" color="#FF0000" size="5" style="line-height:50px">
+<center>Today Hot Deal</center>
+</font>
+    <ion-list>
+      <ion-item ng-repeat="playlist in friends" href="#/tab/playlist/{{playlist.barcode}}" class="item item-thumbnail-left">
+      
+        <img class="productImage" src="{{playlist.imageURL}}">
+        <h2>{{playlist.productName}}</h2>
+        <p>{{playlist.promoString}}</p>
+
+        <p>Price : {{playlist.price}}<b ng-if="playlist.discountPercent!=null">-{{playlist.discountPercent}}%={{playlist.price-(playlist.price*playlist.discountPercent/100)}}</b> | Store : {{playlist.store}}</p>
+
+
+
+
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

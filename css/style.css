@@ -1,0 +1,26 @@
+/* Empty. Add your own CSS if you like */
+.welcomevertical{
+text-align: center;
+vertical-align: middle;
+line-height: 100px;
+background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #FF0000),
+	color-stop(0.82, #660000)
+);
+background-image: -o-linear-gradient(bottom, #FF0000 0%, #660000 82%);
+background-image: -moz-linear-gradient(bottom, #FF0000 0%, #660000 82%);
+background-image: -webkit-linear-gradient(bottom, #FF0000 0%, #660000 82%);
+background-image: -ms-linear-gradient(bottom, #FF0000 0%, #660000 82%);
+background-image: linear-gradient(to bottom, #FF0000 0%, #660000 82%);
+}
+.productImage{
+	max-width: 96px;
+	max-height:96px;
+}
+/*@font-face { 
+	font-family: Ubuntu; 
+	src: url('168.63.185.53:82/ubuntu-r.tff'); 
+} */

@@ -1,0 +1,24 @@
+<ion-view title="Friends">
+  <ion-content class="has-header">
+
+  <div style="height :5px;"></div>
+   <input type="text" ng-model="searchBox" placeholder="Enter Keyword or Barcode here" style="width:74%;display:inline-block;height:50px;font-size:25px;">
+   <button ng-click="btn_search(searchBox)" style="width: 24%;display:inline-block;" class="button button-assertive">
+  Search
+  </button>
+    <ion-list>
+      <ion-item ng-repeat="friend in friends" href="#/tab/friend/{{friend.barcode}}" class="item item-thumbnail-left">
+     
+        <img class="productImage" src="{{friend.imageURL}}">
+        <h2>{{friend.productName}}</h2>
+        <p>{{friend.promoString}}</p>
+
+        <p >Lowest Price : <b><FONT COLOR="FF0000">{{friend.price}} ฿</FONT></b> | Store : {{friend.store}}</p>
+
+
+
+
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
