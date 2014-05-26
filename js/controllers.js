@@ -61,4 +61,8 @@ else{
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 .controller('AccountCtrl', function($scope) {
+})
+.controller('LoginCtrl', function($scope,$rootScope) {
+})
+.controller('RegisterCtrl', function($scope) {
 });
