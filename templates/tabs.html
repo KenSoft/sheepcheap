@@ -3,9 +3,9 @@
   Each tab's child <ion-nav-view> directive will have its own 
   navigation history that also transitions its views in and out.
 -->
-<div class="bar bar-header bar-assertive">
+<!-- <div class="bar bar-header bar-assertive">
   <h1 class="title">Sheep</h1>
-</div>
+</div> -->
 
 <ion-tabs class="tabs-icon-top">
 
@@ -21,6 +21,10 @@
     <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 
+  <!-- Wish List Tab -->
+  <ion-tab title="Wish List" icon="ion-ios7-pricetag" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
 
 
 </ion-tabs>
