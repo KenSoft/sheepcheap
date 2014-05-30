@@ -102,7 +102,7 @@ window.location="/#/register";
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('AccountCtrl', function($scope,$rootScope) {
+.controller('AccountCtrl', function($scope,$rootScope,Parse) {
   console.log($rootScope.sessionId);
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
@@ -113,6 +113,13 @@ window.location="/#/login";
 $scope.registerLink2 = function(){
 window.location="/#/register";
 }
+
+ $scope.friends = [];
+  console.log("Working");
+  Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.friends = data.results;
+  });
 })
 .controller('LoginCtrl', function($scope,$rootScope,Parse) {
     $scope.login = function(input){

@@ -137,6 +137,27 @@ angular.module('starter.services', [])
                 callback(data);
             });
         },
+        getWish : function(userId,callback){
+          console.log("GetAll");
+            $http({
+                method: 'GET',
+                url:'https://api.parse.com/1/classes/'+userId,
+                headers:
+                {
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                console.log("success");
+                callback(data);
+            })
+            .error(function(data){
+                console.log("error");
+            });
+        },
         getAll : function(callback){
           console.log("GetAll");
             $http({
