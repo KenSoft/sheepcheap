@@ -7,6 +7,15 @@ Welcome to Sheep
 </font>
 
 </div>
+
+<center><div ng-hide="view=='login'">
+<button class="button button-assertive" ng-click="loginLink()">
+  Login
+</button>
+<button class="button button-balanced" ng-click="registerLink()">
+  Register
+</button>
+</div></center>
     <ion-list>
       <ion-item ng-repeat="playlist in friends" href="#/tab/playlist/{{playlist.barcode}}" class="item item-thumbnail-left">
       

@@ -45,11 +45,20 @@ else{
     $scope.friends = data.results;
   });
 })
-.controller('HomeCtrl', function($scope,$http,Parse) {
+.controller('HomeCtrl', function($scope,$http,Parse,$rootScope) {
+    console.log($rootScope.sessionId);
+  if($rootScope.sessionId!=null){
+    $scope.view = 'login';
+  }
   /*$scope.playlists = [
     { productName: 'Namthip Drinking Water 500ml',price :'7 Baht',store:'Tops',promoString:'Buy 1 Get 1', id: 1 },
   ];*/
-
+$scope.loginLink = function(){
+window.location="/#/login";
+}
+$scope.registerLink = function(){
+window.location="/#/register";
+}
  $scope.friends = [];
   console.log("Working");
   Parse.getAll(function(data){
@@ -60,7 +69,17 @@ else{
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope,$rootScope) {
+  console.log($rootScope.sessionId);
+  if($rootScope.sessionId!=null){
+    $scope.view = 'login';
+  }
+$scope.loginLink2 = function(){
+window.location="/#/login";
+}
+$scope.registerLink2 = function(){
+window.location="/#/register";
+}
 })
 .controller('LoginCtrl', function($scope,$rootScope,Parse) {
     $scope.login = function(input){

@@ -2,10 +2,19 @@
   <ion-content class="has-header padding">
   	<div class="list list-inset">
 
-    <div class="item">
-      Raiders of the Lost Ark
+    <center>
+    <div ng-hide="view=='login'">
+    	Please 
+		<button class="button button-assertive" ng-click="loginLink2()">
+		  Login
+		</button>
+		Or
+		<button class="button button-balanced" ng-click="registerLink2()">
+		  Register
+		</button>
+		To use Wishlist
     </div>
-
+    </center>
 	</div>
   </ion-content>
 </ion-view>
