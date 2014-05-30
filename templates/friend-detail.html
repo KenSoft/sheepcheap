@@ -11,7 +11,18 @@
 <p>Price {{friend.price}} Baht By {{friend.store}}</p>
 <center><img src="{{friend.imageURL}}"></center>
 <center>
-<button class="button button-assertive" ng-click="addToWish()">
+<div ng-hide="view=='login'">
+    	Please 
+		<button class="button button-assertive" ng-click="loginLink2()">
+		  Login
+		</button>
+		Or
+		<button class="button button-balanced" ng-click="registerLink2()">
+		  Register
+		</button>
+		To use Wishlist
+    </div>
+<button class="button button-assertive" ng-click="addToWish(friend)" ng-show="view=='login'">
   Add To Wish List
 </button>
 </center>

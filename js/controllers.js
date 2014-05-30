@@ -29,20 +29,53 @@ else{
 
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams,Parse) {
-      $scope.friends = [];
-  console.log($stateParams.friendId);
+.controller('FriendDetailCtrl', function($scope, $stateParams,Parse,$rootScope) {
+   console.log($rootScope.sessionId);
+  if($rootScope.sessionId!=null){
+    $scope.view = 'login';
+  }
+$scope.loginLink2 = function(){
+window.location="/#/login";
+}
+$scope.registerLink2 = function(){
+window.location="/#/register";
+}
+$scope.addToWish = function(data){
+console.log(data);
+    Parse.addToWish(data,$rootScope.userId,function(data){
+      console.log(data);
+    });
+}
+    $scope.friends = [];
+    console.log($stateParams.friendId);
     Parse.searchTel($stateParams.friendId,function(data){
     console.log(data);
     $scope.friends = data.results;
   });
 })
-.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse) {
+.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse,$rootScope) {
+   console.log($rootScope.sessionId);
+  if($rootScope.sessionId!=null){
+    $scope.view = 'login';
+  }
+$scope.loginLink2 = function(){
+window.location="/#/login";
+}
+$scope.registerLink2 = function(){
+window.location="/#/register";
+}
+$scope.addToWish = function(data){
+console.log(data);
+    Parse.addToWish(data,$rootScope.userId,function(data){
+      console.log(data);
+    });
+}
       $scope.friends = [];
   console.log($stateParams.friendId);
     Parse.searchTel($stateParams.friendId,function(data){
     console.log(data);
     $scope.friends = data.results;
+
   });
 })
 .controller('HomeCtrl', function($scope,$http,Parse,$rootScope) {

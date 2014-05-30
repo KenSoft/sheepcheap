@@ -112,6 +112,31 @@ angular.module('starter.services', [])
                 callback(data);
             });
         },
+        addToWish : function(data,userId,callback){
+    //      console.log(q);
+            $http({
+
+                method: 'POST',
+                url:'https://api.parse.com/1/classes/'+userId,
+                headers:
+                {
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    barcode:data.barcode,
+                    imageURL:data.imageURL,
+                    productName:data.productName,
+                    store:data.store,
+                    price:data.price
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                callback(data);
+            });
+        },
         getAll : function(callback){
           console.log("GetAll");
             $http({
