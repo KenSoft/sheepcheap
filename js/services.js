@@ -9,7 +9,7 @@ angular.module('starter.services', [])
           console.log(q);
             $http({
                  params: {
-            where: {barcode:q}
+                    where: {barcode:q}
                 },
             method: 'GET',
                 url:'https://api.parse.com/1/classes/hotDeal',
@@ -62,11 +62,61 @@ angular.module('starter.services', [])
                 callback(data);
             });
         },
+        login : function(data,callback){
+            console.log('GetAll');
+            $http({
+                params: {
+                    username:data.username,
+                    password:data.password
+                },
+                method: 'GET',
+                url:'https://api.parse.com/1/login',
+                headers:
+                {
+                    'X-Parse-Application-Id': appId,
+                    'X-Parse-REST-API-Key': apiKey,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                console.log('success');
+                callback(data);
+            })
+            .error(function(data){
+                console.log('error'+data);
+            });
+        },
+        register : function(data,callback){
+    //      console.log(q);
+            $http({
+
+                method: 'POST',
+                url:'https://api.parse.com/1/users',
+                headers:
+                {
+                    'X-Parse-Application-Id': appId,
+                    'X-Parse-REST-API-Key': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    username:data.username,
+                    password:data.password,
+                    email:data.email,
+                    firstName:data.first,
+                    lastName:data.last
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                callback(data);
+            });
+        },
         getAll : function(callback){
           console.log("GetAll");
             $http({
                 method: 'GET',
-                url:'https://api.parse.com/1/classes/hotDeal',
+                url:'https://api.parse.com/1/classes/products',
                 headers:
                 {
                     'X-Parse-Application-Id': app_id,
@@ -82,8 +132,6 @@ angular.module('starter.services', [])
             .error(function(data){
                 console.log("error");
             });
-
         }
     };
-
 });

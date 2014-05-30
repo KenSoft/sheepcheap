@@ -40,7 +40,7 @@ else{
 .controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse) {
       $scope.friends = [];
   console.log($stateParams.friendId);
-    Parse.searchHot($stateParams.friendId,function(data){
+    Parse.searchTel($stateParams.friendId,function(data){
     console.log(data);
     $scope.friends = data.results;
   });
