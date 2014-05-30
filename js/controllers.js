@@ -62,7 +62,22 @@ else{
 })
 .controller('AccountCtrl', function($scope) {
 })
-.controller('LoginCtrl', function($scope,$rootScope) {
-})
-.controller('RegisterCtrl', function($scope) {
+.controller('LoginCtrl', function($scope,$rootScope,Parse) {
+    $scope.login = function(input){
+    Parse.login(input,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      window.location="/#/tab/dash";
+
+    });
+}})
+.controller('RegisterCtrl', function($scope,Parse) {
+    $scope.register = function(input){
+    Parse.register(input,function(data){
+      console.log(data);
+      window.location="/#/login";
+
+    });
+  };
 });

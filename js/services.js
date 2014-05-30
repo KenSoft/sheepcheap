@@ -73,8 +73,8 @@ angular.module('starter.services', [])
                 url:'https://api.parse.com/1/login',
                 headers:
                 {
-                    'X-Parse-Application-Id': appId,
-                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
                     'Content-Type': 'application/json'
                 }
             })
@@ -95,8 +95,8 @@ angular.module('starter.services', [])
                 url:'https://api.parse.com/1/users',
                 headers:
                 {
-                    'X-Parse-Application-Id': appId,
-                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
                     'Content-Type': 'application/json'
                 },
                 data: {
