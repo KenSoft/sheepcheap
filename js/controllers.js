@@ -45,7 +45,6 @@ console.log(data);
     Parse.addToWish(data,$rootScope.userId,function(data){
       console.log(data);
     });
-    $scope.view = 'added';
 }
     $scope.friends = [];
     console.log($stateParams.friendId);
@@ -69,7 +68,6 @@ $scope.addToWish = function(data){
 console.log(data);
     Parse.addToWish(data,$rootScope.userId,function(data){
       console.log(data);
-      $scope.view = 'added';
     });
 }
       $scope.friends = [];

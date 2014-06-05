@@ -29,7 +29,7 @@ angular.module('starter.services', [])
           console.log(q);
             $http({
                  params: {
-            where: {barcode:q}
+            where: {barcode:q,store:"Big-C"}
                 },
             method: 'GET',
                 url:'https://api.parse.com/1/classes/products',
@@ -49,7 +49,7 @@ angular.module('starter.services', [])
             console.log(q);
             $http({
             method: 'GET',
-                url:'https://api.parse.com/1/classes/products?where='+encodeURIComponent('{"productName" : { "\$regex" : ".*'+q+'.*" } }'),
+                url:'https://api.parse.com/1/classes/products?where='+encodeURIComponent('{"store":"Big-C","productName" : { "\$regex" : ".*'+q+'.*" } }'),
                 headers:
                 {
                     'X-Parse-Application-Id': app_id,
