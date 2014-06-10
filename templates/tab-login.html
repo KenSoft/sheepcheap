@@ -12,4 +12,24 @@
 		Login
 	</button>
   </ion-content>
+  <ion-tabs class="tabs-icon-top">
+
+
+  <!-- Pets Tab -->
+  <ion-tab title="Home" icon="icon ion-home" href="#/tab/dash">
+    <ion-nav-view name="tab-dash"></ion-nav-view>
+  </ion-tab>
+
+
+  <!-- Adopt Tab -->
+  <ion-tab title="Search" icon="icon ion-search" href="#/tab/friends">
+    <ion-nav-view name="tab-friends"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Wish List Tab -->
+  <ion-tab title="Wish List" icon="ion-ios7-pricetag" href="#/tab/account">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>
 </ion-view>
