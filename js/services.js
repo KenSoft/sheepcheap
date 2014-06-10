@@ -88,6 +88,7 @@ angular.module('starter.services', [])
             });
         },
         register : function(data,callback){
+
     //      console.log(q);
             $http({
 
