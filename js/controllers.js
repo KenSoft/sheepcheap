@@ -35,10 +35,78 @@ else{
     $scope.view = 'login';
   }
 $scope.loginLink2 = function(){
-window.location="/#/login";
+  $scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup.html",
+        title: 'Login',
+        subTitle: 'Please Login',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Login</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 $scope.registerLink2 = function(){
-window.location="/#/register";
+$scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup2.html",
+        title: 'Register',
+        subTitle: 'Please Register',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Register</b>',
+            type: 'button-balanced',
+            onTap: function(e) {
+            
+    Parse.register($scope.data,function(data){
+      console.log(data);
+      
+    });
+    Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 $scope.addToWish = function(data){
 console.log(data);
@@ -59,10 +127,78 @@ console.log(data);
     $scope.view = 'login';
   }
 $scope.loginLink2 = function(){
-window.location="/#/login";
+  $scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup.html",
+        title: 'Login',
+        subTitle: 'Please Login',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Login</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 $scope.registerLink2 = function(){
-window.location="/#/register";
+$scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup2.html",
+        title: 'Register',
+        subTitle: 'Please Register',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Register</b>',
+            type: 'button-balanced',
+            onTap: function(e) {
+            
+    Parse.register($scope.data,function(data){
+      console.log(data);
+      
+    });
+    Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 $scope.addToWish = function(data){
 console.log(data);
@@ -78,7 +214,7 @@ console.log(data);
 
   });
 })
-.controller('HomeCtrl', function($scope,$http,Parse,$rootScope) {
+.controller('HomeCtrl', function($scope,$http,Parse,$rootScope,$ionicPopup) {
     console.log($rootScope.sessionId);
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
@@ -87,10 +223,79 @@ console.log(data);
     { productName: 'Namthip Drinking Water 500ml',price :'7 Baht',store:'Tops',promoString:'Buy 1 Get 1', id: 1 },
   ];*/
 $scope.loginLink = function(){
-window.location="/#/login";
+  $scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup.html",
+        title: 'Login',
+        subTitle: 'Please Login',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Login</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
+      
 }
 $scope.registerLink = function(){
-window.location="/#/register";
+ $scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup2.html",
+        title: 'Register',
+        subTitle: 'Please Register',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Register</b>',
+            type: 'button-balanced',
+            onTap: function(e) {
+            
+    Parse.register($scope.data,function(data){
+      console.log(data);
+      
+    });
+    Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
  $scope.friends = [];
   console.log("Working");
@@ -108,10 +313,78 @@ window.location="/#/register";
     $scope.view = 'login';
   }
 $scope.loginLink2 = function(){
-window.location="/#/login";
+  $scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup.html",
+        title: 'Login',
+        subTitle: 'Please Login',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Login</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 $scope.registerLink2 = function(){
-window.location="/#/register";
+$scope.data = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup2.html",
+        title: 'Register',
+        subTitle: 'Please Register',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Register</b>',
+            type: 'button-balanced',
+            onTap: function(e) {
+            
+    Parse.register($scope.data,function(data){
+      console.log(data);
+      
+    });
+    Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $scope.view = 'login';
+
+    });
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
 }
 
  $scope.friends = [];
