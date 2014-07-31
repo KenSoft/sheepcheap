@@ -29,7 +29,47 @@ angular.module('starter.services', [])
           console.log(q);
             $http({
                  params: {
+            where: {barcode:q}
+                },
+            method: 'GET',
+                url:'https://api.parse.com/1/classes/products',
+                headers:
+                {
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                callback(data);
+            });
+        },
+        getBigC : function(q,callback){
+          console.log(q);
+            $http({
+                 params: {
             where: {barcode:q,store:"Big-C"}
+                },
+            method: 'GET',
+                url:'https://api.parse.com/1/classes/products',
+                headers:
+                {
+                    'X-Parse-Application-Id': app_id,
+                    'X-Parse-REST-API-Key': api_key,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .success(function(data) {
+                console.log(data);
+                callback(data);
+            });
+        },
+        getLotus : function(q,callback){
+          console.log(q);
+            $http({
+                 params: {
+            where: {barcode:q,store:"Tesco Lotus"}
                 },
             method: 'GET',
                 url:'https://api.parse.com/1/classes/products',
@@ -113,7 +153,8 @@ angular.module('starter.services', [])
                 callback(data);
             });
         },
-        addToWish : function(data,userId,callback){
+        addToWish : function(data,quantityRaw,userId,callback){
+            var quantity=parseInt(quantityRaw.quantity);
     //      console.log(q);
             $http({
 
@@ -127,10 +168,7 @@ angular.module('starter.services', [])
                 },
                 data: {
                     barcode:data.barcode,
-                    imageURL:data.imageURL,
-                    productName:data.productName,
-                    store:data.store,
-                    price:data.price
+                    quantity:quantity
                 }
             })
             .success(function(data) {

@@ -29,7 +29,7 @@ else{
 
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams,Parse,$rootScope) {
+.controller('FriendDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup) {
    console.log($rootScope.sessionId);
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
@@ -109,11 +109,42 @@ $scope.data = {}
       });
 }
 $scope.addToWish = function(data){
-console.log(data);
-    Parse.addToWish(data,$rootScope.userId,function(data){
+    $scope.quantity = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup3.html",
+        title: 'Add To Wishlist',
+        subTitle: 'Please type quantity',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>OK</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            console.log($scope.quantity);
+   console.log(data);
+    Parse.addToWish(data,$scope.quantity,$rootScope.userId,function(data){
       console.log(data);
     });
-}
+
+ 
+
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
+
+
+ } ;
     $scope.friends = [];
     console.log($stateParams.friendId);
     Parse.searchTel($stateParams.friendId,function(data){
@@ -121,11 +152,17 @@ console.log(data);
     $scope.friends = data.results;
   });
 })
-.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse,$rootScope) {
+.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup) {
    console.log($rootScope.sessionId);
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
   }
+       $scope.friends = [];
+  console.log($stateParams.friendId);
+      Parse.searchTel($stateParams.friendId,function(data){
+    console.log(data);
+    $scope.friends = data.results;
+    });
 $scope.loginLink2 = function(){
   $scope.data = {}
     $ionicPopup.show({
@@ -201,18 +238,42 @@ $scope.data = {}
       });
 }
 $scope.addToWish = function(data){
-console.log(data);
-    Parse.addToWish(data,$rootScope.userId,function(data){
+    $scope.quantity = {}
+    $ionicPopup.show({
+        templateUrl:"templates/popup3.html",
+        title: 'Add To Wishlist',
+        subTitle: 'Please type quantity',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>OK</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            console.log($scope.quantity);
+   console.log(data);
+    Parse.addToWish(data,$scope.quantity,$rootScope.userId,function(data){
       console.log(data);
     });
-}
-      $scope.friends = [];
-  console.log($stateParams.friendId);
-    Parse.searchTel($stateParams.friendId,function(data){
-    console.log(data);
-    $scope.friends = data.results;
 
-  });
+ 
+
+    return true;
+            }
+          },
+        ]
+      }).then(function(res) {
+        console.log('Tapped!', res);
+      }, function(err) {
+        console.log('Err:', err);
+      }, function(popup) {
+        // If you need to access the popup directly, do it in the notify method
+        // This is also where you can programatically close the popup:
+        // popup.close();
+      });
+
+
+ } ;
 })
 .controller('HomeCtrl', function($scope,$http,Parse,$rootScope,$ionicPopup) {
     console.log($rootScope.sessionId);
@@ -307,7 +368,7 @@ $scope.registerLink = function(){
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('AccountCtrl', function($scope,$rootScope,Parse) {
+.controller('AccountCtrl', function($scope,$rootScope,Parse,$ionicPopup) {
   console.log($rootScope.sessionId);
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
@@ -387,12 +448,63 @@ $scope.data = {}
       });
 }
 
- $scope.friends = [];
+
+
+
+
+
+  $scope.wishlist = [];
+  $scope.wishlistSummary = {
+    bigc: 0,
+    lotus: 0
+  };
   console.log("Working");
   Parse.getWish($rootScope.userId,function(data){
     console.log(data);
-    $scope.friends = data.results;
+    $scope.wishlist = data.results;
+
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
   });
+
+
+
+
+  $scope.getPrice = function(wish){
+    $scope.getBigcPrice(wish);
+    $scope.getLotusPrice(wish);
+  };
+
+  $scope.getBigcPrice = function(wish){
+    //price 
+    //name
+    //wish.bigcPrice = wish.quantity * 10;
+    Parse.getBigC(wish.barcode,function(data){
+      wish.bigcPrice=data.results[0].price;
+      wish.bigcProductName=data.results[0].productName;
+
+      $scope.wishlistSummary.bigc += wish.bigcPrice * wish.quantity;
+     
+    });
+  };
+
+  $scope.getLotusPrice = function(wish){
+    //price 
+    //name
+    Parse.getLotus(wish.barcode,function(data){
+      wish.lotusPrice=data.results[0].price;
+      wish.lotusProductName=data.results[0].productName;
+
+      $scope.wishlistSummary.lotus += wish.lotusPrice * wish.quantity;
+    });
+  };
+
+
+
+
+
 })
 .controller('LoginCtrl', function($scope,$rootScope,Parse) {
     $scope.login = function(input){

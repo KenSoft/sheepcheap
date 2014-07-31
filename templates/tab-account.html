@@ -14,18 +14,23 @@
     </div>
     </center>
       <ion-list ng-show="view=='login'">
-      <ion-item ng-repeat="playlist in friends" class="item item-thumbnail-left">
+      <ion-item ng-repeat="playlist in wishlist" class="item item-thumbnail-left">
       
         <img class="productImage" src="{{playlist.imageURL}}">
-        <h2>{{playlist.productName}}</h2>
+        <h2>{{playlist.barcode}}</h2>
         <!-- <p>{{playlist.promoString}}</p> -->
 
-        <p>Price : {{playlist.price}}<!-- <b ng-if="playlist.discountPercent!=null">-{{playlist.discountPercent}}%={{playlist.price-(playlist.price*playlist.discountPercent/100)}}</b> --> | Store : {{playlist.store}}</p>
+        <p>{{playlist.quantity}}</p>
+
+        <p>{{playlist.bigcPrice}} {{playlist.bigcProductName}}</p>
+        <p>{{playlist.lotusPrice}} {{playlist.lotusProductName}}</p>
 
 
-
+        
 
       </ion-item>
     </ion-list>
+    <p>Sum BigC : {{wishlistSummary.bigc}}</p>
+    <p>Sum Lotus : {{wishlistSummary.lotus}}</p>
   </ion-content>
 </ion-view>
