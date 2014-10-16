@@ -13,24 +13,58 @@
 		To use Wishlist
     </div>
     </center>
+    <center>
+    <font face="Ubuntu" color="#FF0000" size="5"  ng-show="view=='login'">
+    Login as {{username}}
+
+    </font>
+    </center>
       <ion-list ng-show="view=='login'">
-      <ion-item ng-repeat="playlist in wishlist" class="item item-thumbnail-left">
-      
-        <img class="productImage" src="{{playlist.imageURL}}">
-        <h2>{{playlist.barcode}}</h2>
+      <ion-item ng-repeat="playlist in wishlist" class="item" >  <!--  -->
+      <h2 ng-if="playlist.bigcProductName">{{playlist.bigcProductName}}</h2>
+      <h2 ng-if="!playlist.bigcProductName">{{playlist.lotusProductName}}</h2>
+      <div class="row">
+
+
+
+
+      <img ng-if="playlist.bigcImage" src="{{playlist.bigcImage}}" style="width:90px;height:90px;">
+      <img ng-if="!playlist.bigcImage" src="{{playlist.lotusImage}}" style="width:90px;height:90px;">
+
+  <div class="col col-20" ><center><button class="button button-assertive" ng-click="btn_edit(playlist)">{{playlist.quantity}}x</button></center></div>
+
+  <div class="col col-20" ng-if="playlist.bigcPrice">BigC<br><br><p style="{{heightlightBigc(playlist)}}">{{playlist.bigcPrice}}</p></div>
+  <div class="col col-20" ng-if="!playlist.bigcPrice">N/A</div>
+
+
+
+  <div class="col col-20" ng-if="playlist.lotusPrice">Lotus<br><br><p style="{{heightlightLotus(playlist)}}">{{playlist.lotusPrice}}</p></div>
+  <div class="col col-20" ng-if="!playlist.lotusPrice">N/A</div>
+  <div class="col col-20"><button ng-click="btn_delete(playlist)" class="button button-assertive">Delete</button></div>
+
+</div>
+        
+        <!-- <h2>{{playlist.barcode}}</h2> -->
         <!-- <p>{{playlist.promoString}}</p> -->
 
-        <p>{{playlist.quantity}}</p>
 
-        <p>{{playlist.bigcPrice}} {{playlist.bigcProductName}}</p>
-        <p>{{playlist.lotusPrice}} {{playlist.lotusProductName}}</p>
+<!--         <p>{{playlist.bigcPrice}} {{playlist.bigcProductName}}</p>
+        <p>{{playlist.lotusPrice}} {{playlist.lotusProductName}}</p> -->
 
 
         
 
       </ion-item>
+      <ion-item class="item" >
+            <div class="row">
+            <div class"col" style="width:90px;"></div>
+  <p class="col col-10"></p>
+  <p class="col col-10">Sum</p>
+  <p class="col col-20">{{wishlistSummary.bigc}}</p>
+  <p class="col col-20">{{wishlistSummary.lotus}}</p>
+
+</div>
+</ion-item>
     </ion-list>
-    <p>Sum BigC : {{wishlistSummary.bigc}}</p>
-    <p>Sum Lotus : {{wishlistSummary.lotus}}</p>
   </ion-content>
 </ion-view>

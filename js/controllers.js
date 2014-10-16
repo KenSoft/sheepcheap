@@ -3,34 +3,50 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {
 })
 
-.controller('FriendsCtrl', function($scope,$http,Parse) {
+.controller('FriendsCtrl', function($scope,$http,Parse,$rootScope) {
+  
+      $scope.view = 'loading';
       $scope.friends = [];
+      $scope.searchBox=$rootScope.keyword;
   console.log("Working");
-
+    if($rootScope.keyword!=""){
+      Parse.searchName($rootScope.keyword,function(data){
+      console.log(data);
+      $scope.friends = data;
+      $scope.view = 'loading';
+    })
+  }
   // Is a number
 
     $scope.btn_search = function(searchBox,callback){
+    $scope.view = 'load';
         console.log(searchBox);
-            if (!isNaN(parseInt(searchBox[0]))) {
-  Parse.searchTel(searchBox,function(data){
-    console.log(data);
-    $scope.friends = data.results;
-  });
-
-}
-else{
+        $rootScope.keyword=searchBox;
       Parse.searchName(searchBox,function(data){
     console.log(data);
-    $scope.friends = data.results;
-})
-}
+    $scope.friends = data;
+        $scope.view = 'loading';
+    })
 
 }
 
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup) {
+.controller('FriendDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup,$localstorage) {
    console.log($rootScope.sessionId);
+      if ($localstorage.get('password')!=null && $localstorage.get('username')!=null){
+
+    $scope.data = {}
+    $scope.data.username=$localstorage.get('username');
+    $scope.data.password=$localstorage.get('password');
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
+      $scope.view = 'login';
+    });
+   }
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
   }
@@ -46,14 +62,16 @@ $scope.loginLink2 = function(){
           {
             text: '<b>Login</b>',
             type: 'button-assertive',
-            onTap: function(e) {
-            
+          onTap: function(e) {
+      $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+
       Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
       $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
       $scope.view = 'login';
-
     });
     return true;
             }
@@ -81,15 +99,19 @@ $scope.data = {}
           {
             text: '<b>Register</b>',
             type: 'button-balanced',
-            onTap: function(e) {
+          onTap: function(e) {
             
     Parse.register($scope.data,function(data){
       console.log(data);
       
     });
+          $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+      
     Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
+      $rootScope.username=data.username;
       $rootScope.userId=data.objectId;
       $scope.view = 'login';
 
@@ -149,11 +171,24 @@ $scope.addToWish = function(data){
     console.log($stateParams.friendId);
     Parse.searchTel($stateParams.friendId,function(data){
     console.log(data);
-    $scope.friends = data.results;
+    $scope.friends = data;
   });
 })
-.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup) {
+.controller('PlaylistDetailCtrl', function($scope, $stateParams,Parse,$rootScope,$ionicPopup,$localstorage) {
    console.log($rootScope.sessionId);
+    if ($localstorage.get('password')!=null && $localstorage.get('username')!=null){
+
+    $scope.data = {}
+    $scope.data.username=$localstorage.get('username');
+    $scope.data.password=$localstorage.get('password');
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
+      $scope.view = 'login';
+    });
+   }
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
   }
@@ -161,7 +196,7 @@ $scope.addToWish = function(data){
   console.log($stateParams.friendId);
       Parse.searchTel($stateParams.friendId,function(data){
     console.log(data);
-    $scope.friends = data.results;
+    $scope.friends = data;
     });
 $scope.loginLink2 = function(){
   $scope.data = {}
@@ -176,13 +211,15 @@ $scope.loginLink2 = function(){
             text: '<b>Login</b>',
             type: 'button-assertive',
             onTap: function(e) {
-            
+      $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+
       Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
       $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
       $scope.view = 'login';
-
     });
     return true;
             }
@@ -216,9 +253,13 @@ $scope.data = {}
       console.log(data);
       
     });
+          $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+      
     Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
+      $rootScope.username=data.username;
       $rootScope.userId=data.objectId;
       $scope.view = 'login';
 
@@ -275,8 +316,21 @@ $scope.addToWish = function(data){
 
  } ;
 })
-.controller('HomeCtrl', function($scope,$http,Parse,$rootScope,$ionicPopup) {
+.controller('HomeCtrl', function($scope,$http,Parse,$rootScope,$ionicPopup,$localstorage) {
     console.log($rootScope.sessionId);
+   if ($localstorage.get('password')!=null && $localstorage.get('username')!=null){
+
+    $scope.data = {}
+    $scope.data.username=$localstorage.get('username');
+    $scope.data.password=$localstorage.get('password');
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
+      $scope.view = 'login';
+    });
+   }
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
   }
@@ -296,13 +350,15 @@ $scope.loginLink = function(){
             text: '<b>Login</b>',
             type: 'button-assertive',
             onTap: function(e) {
-            
+      $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+
       Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
       $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
       $scope.view = 'login';
-
     });
     return true;
             }
@@ -337,9 +393,13 @@ $scope.registerLink = function(){
       console.log(data);
       
     });
+          $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
+      
     Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
+      $rootScope.username=data.username;
       $rootScope.userId=data.objectId;
       $scope.view = 'login';
 
@@ -362,17 +422,126 @@ $scope.registerLink = function(){
   console.log("Working");
   Parse.getAll(function(data){
     console.log(data);
-    $scope.friends = data.results;
+    $scope.products = data;
+    $scope.load = 'loading';
   });
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
-.controller('AccountCtrl', function($scope,$rootScope,Parse,$ionicPopup) {
+.controller('AccountCtrl', function($scope,$rootScope,Parse,$ionicPopup,$localstorage) {
   console.log($rootScope.sessionId);
+     if ($localstorage.get('password')!=null && $localstorage.get('username')!=null){
+
+    $scope.data = {}
+    $scope.data.username=$localstorage.get('username');
+    $scope.data.password=$localstorage.get('password');
+      Parse.login($scope.data,function(data){
+      console.log(data);
+      $rootScope.sessionId=data.sessionToken;
+      $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
+      $scope.view = 'login';
+        Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
+
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
+  });
+    });
+   }
   if($rootScope.sessionId!=null){
     $scope.view = 'login';
   }
+    $scope.btn_edit = function(data){
+    $scope.quantity = {};
+    $ionicPopup.show({
+        templateUrl:"templates/popup3.html",
+        title: 'Add To Wishlist',
+        subTitle: 'Please type quantity',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>OK</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            console.log($scope.quantity);
+   console.log(data);
+    Parse.editWish(data,$rootScope.userId,parseInt($scope.quantity.quantity),function(data){
+      console.log(data);
+      
+    Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
+
+  $scope.wishlist = [];
+  $scope.wishlistSummary.bigc=0;
+  $scope.wishlistSummary.lotus=0;
+  console.log("Working");
+  Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
+
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
+  });
+  });
+
+
+
+
+    });
+    }
+  }]
+})
+}
+    $scope.btn_delete = function(data){
+          $ionicPopup.show({
+
+        title: 'Confirm',
+        subTitle: 'Do you want to delete '+data.bigcProductName+' from wishlist?',
+        scope: $scope,
+        rootScope:$rootScope,
+        buttons: [
+          { text: 'Cancel', onTap: function(e) { return true; } },
+          {
+            text: '<b>Delete</b>',
+            type: 'button-assertive',
+            onTap: function(e) {
+            
+      Parse.deleteWish(data,$rootScope.userId,function(data){
+    Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
+
+  $scope.wishlist = [];
+  $scope.wishlistSummary.bigc=0;
+  $scope.wishlistSummary.lotus=0;
+  console.log("Working");
+  Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
+
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
+  });
+  });
+      });
+    return true;
+            }
+}
+
+]});
+}
+  
 $scope.loginLink2 = function(){
   $scope.data = {}
     $ionicPopup.show({
@@ -386,13 +555,29 @@ $scope.loginLink2 = function(){
             text: '<b>Login</b>',
             type: 'button-assertive',
             onTap: function(e) {
-            
+      $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
       Parse.login($scope.data,function(data){
       console.log(data);
       $rootScope.sessionId=data.sessionToken;
       $rootScope.userId=data.objectId;
+      $rootScope.username=data.username;
       $scope.view = 'login';
+        $scope.wishlist = [];
+  $scope.wishlistSummary = {
+    bigc: 0,
+    lotus: 0
+  };
+  console.log("Working");
+  Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
 
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
+  });
     });
     return true;
             }
@@ -426,12 +611,29 @@ $scope.data = {}
       console.log(data);
       
     });
+      $localstorage.set('username', $scope.data.username);
+      $localstorage.set('password', $scope.data.password);
     Parse.login($scope.data,function(data){
       console.log(data);
+      $rootScope.username=data.username;
       $rootScope.sessionId=data.sessionToken;
       $rootScope.userId=data.objectId;
       $scope.view = 'login';
+        $scope.wishlist = [];
+  $scope.wishlistSummary = {
+    bigc: 0,
+    lotus: 0
+  };
+  console.log("Working");
+  Parse.getWish($rootScope.userId,function(data){
+    console.log(data);
+    $scope.wishlist = data.results;
 
+    for(var i=0;i<$scope.wishlist.length;i++){
+      $scope.getPrice($scope.wishlist[i]);
+    }
+
+  });
     });
     return true;
             }
@@ -482,9 +684,9 @@ $scope.data = {}
     //name
     //wish.bigcPrice = wish.quantity * 10;
     Parse.getBigC(wish.barcode,function(data){
-      wish.bigcPrice=data.results[0].price;
-      wish.bigcProductName=data.results[0].productName;
-
+      wish.bigcPrice=data[0].price;
+      wish.bigcProductName=data[0].productName;
+      wish.bigcImage=data[0].imageURL;
       $scope.wishlistSummary.bigc += wish.bigcPrice * wish.quantity;
      
     });
@@ -494,14 +696,32 @@ $scope.data = {}
     //price 
     //name
     Parse.getLotus(wish.barcode,function(data){
-      wish.lotusPrice=data.results[0].price;
-      wish.lotusProductName=data.results[0].productName;
-
+      wish.lotusPrice=data[0].price;
+      wish.lotusProductName=data[0].productName;
+      wish.lotusImage=data[0].imageURL;
       $scope.wishlistSummary.lotus += wish.lotusPrice * wish.quantity;
     });
   };
 
+  $scope.heightlightBigc = function(wish){
+    if(wish.bigcPrice && wish.lotusPrice)
+    {
+      if(wish.bigcPrice < wish.lotusPrice){
+        return "font-size:20px;color:#0F0;";
+      }
+    }
+    return "font-size:20px;";
+  };
 
+  $scope.heightlightLotus = function(wish){
+    if(wish.bigcPrice && wish.lotusPrice)
+    {
+      if(wish.bigcPrice > wish.lotusPrice){
+        return "font-size:20px;color:#0F0;";
+      }
+    }
+    return "font-size:20px;";
+  };
 
 
 

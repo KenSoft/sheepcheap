@@ -4,7 +4,7 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view title="Home">
+<!-- <ion-view title="Home">
   <ion-content has-header="true" padding="true">
 <ion-item ng-repeat="friend in friends">
 <p>{{friend.productName}}</p>
@@ -32,4 +32,43 @@
 
 
   </ion-content>
+</ion-view>
+ -->
+ <!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'firend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view title="Home">
+  <ion-content has-header="true" padding="true">
+
+  
+<ion-item ng-repeat="friend in friends">
+  <p>{{friend.productName}}</p>
+  <p>Price {{friend.price}} Baht By {{friend.store}}</p>
+  <center><img src="{{friend.imageURL}}"></center>
+  <center>
+  </center>
+</ion-item>
+<br><br>
+<center>
+<div ng-hide="view=='login'">
+        Please 
+      <button class="button button-assertive" ng-click="loginLink2()">
+        Login
+      </button>
+      Or
+      <button class="button button-balanced" ng-click="registerLink2()">
+        Register
+      </button>
+      To use Wishlist
+</div>
+
+<button ng-show="friends.length > 0 && view=='login'" class="button button-assertive" ng-click="addToWish(friends[0])" ng-show="view=='login'">
+    Add To Wish List
+  </button>
+</center>
+  </ion-content>
+
 </ion-view>

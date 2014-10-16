@@ -2,12 +2,10 @@
   <ion-content>
    <div class="welcomevertical">
 <font face="Ubuntu" color="#FFFFFF" size="5">
-Welcome to Sheep
-
+<p style="line-height: 25vh;">Welcome to Sheep</p>
+<p>To Get Started scroll down to view some product \/</p>
+<p>To Use Wishlist Please register or login use the button below \/</p>
 </font>
-
-</div>
-
 <center><div ng-hide="view=='login'">
 <button class="button button-assertive" ng-click="loginLink()">
   Login
@@ -16,8 +14,24 @@ Welcome to Sheep
   Register
 </button>
 </div></center>
+<center>
+<font face="Ubuntu" color="#FFFFFF" size="5"  ng-show="view=='login'">
+Welcome Back {{username}}
+
+</font>
+</center>
+<img src="/res/screens/android/sheep_cute copy.png" style="height:25%" >
+</div>
+
+
+<center>
+<font face="Ubuntu" color="#FF0000" size="5"  ng-hide="load=='loading'">
+Loading Please Wait...
+</font>
+</center>
     <ion-list>
-      <ion-item ng-repeat="playlist in friends" href="#/tab/playlist/{{playlist.barcode}}" class="item item-thumbnail-left">
+      <ion-item class="item item-thumbnail-left" collection-repeat="playlist in products" collection-item-width="'100%'" collection-item-height="100" href="#/tab/playlist/{{playlist.barcode}}" ng-style="{ 'width' : '101%'}"> 
+      <!-- ng-repeat="playlist in friends" href="#/tab/playlist/{{playlist.barcode}}" class="item item-thumbnail-left" -->
       
         <img class="productImage" src="{{playlist.imageURL}}">
         <h2>{{playlist.productName}}</h2>

@@ -1,13 +1,26 @@
 <ion-view title="Search">
   <ion-content class="has-header">
 
-  <div style="height :5px;"></div>
-   <input type="text" ng-model="searchBox" placeholder="Enter Keyword or Barcode here" style="width:74%;display:inline-block;height:50px;font-size:25px;">
+
+  <div class="list">
+
+  <div class="item item-input-inset">
+  <label class="item-input-wrapper">
+   <input type="text" ng-model="searchBox" placeholder="Enter Keyword here" style="width:74%;display:inline-block;height:50px;font-size:25px;">
+   </label>
    <button ng-click="btn_search(searchBox)" style="width: 24%;display:inline-block;" class="button button-assertive">
   Search
   </button>
+  </div>
+  </div>
+  <center><div ng-hide="view=='loading'" ng-show="view=='load'">
+<font face="Ubuntu" color="#FF0000" size="5">
+Loading Please Wait...
+</font>
+</div></center>
+
     <ion-list>
-      <ion-item ng-repeat="friend in friends" href="#/tab/friend/{{friend.barcode}}" class="item item-thumbnail-left">
+      <ion-item href="#/tab/friend/{{friend.barcode}}" class="item item-thumbnail-left" collection-repeat="friend in friends" collection-item-width="'100%'" collection-item-height="100" ng-style="{ 'width' : '101%'}">
      
         <img class="productImage" src="{{friend.imageURL}}">
         <h2>{{friend.productName}}</h2>
