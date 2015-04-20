@@ -1,17 +1,17 @@
 <ion-view title="Wish List">
   <ion-content class="has-header padding">
     <center>
-    <div ng-hide="view=='login'">
-    	Please 
-		<button class="button button-assertive" ng-click="loginLink2()">
-		  Login
-		</button>
-		Or
-		<button class="button button-balanced" ng-click="registerLink2()">
-		  Register
-		</button>
-		To use Wishlist
-    </div>
+<div ng-hide="view=='login'">
+      <p style="font-size:20px;line-height: 20px;">To Use Wishlist</p>
+      <button class="button button-assertive" ng-click="loginLink2()" style="display:inline-block;width:46vw">
+        Login
+      </button>
+      <button class="button button-balanced" ng-click="registerLink2()" style="display:inline-block;width:46vw">
+        Register
+      </button>
+      <p>
+      <center><img src="https://dl.dropboxusercontent.com/u/108136823/Wishlist%20art.png" style="width:90vw"></center>
+</div>
     </center>
     <center>
     <font face="Ubuntu" color="#FF0000" size="5"  ng-show="view=='login'">

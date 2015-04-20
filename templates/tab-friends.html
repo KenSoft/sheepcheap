@@ -1,4 +1,4 @@
-<ion-view title="Search">
+<ion-view title="View Products">
   <ion-content class="has-header">
 
 
@@ -11,6 +11,9 @@
    <button ng-click="btn_search(searchBox)" style="width: 24%;display:inline-block;" class="button button-assertive">
   Search
   </button>
+  </div>
+    <div class="item item-input-inset">
+  <center><button ng-click="getAll()" style="width:100vw;" class="button button-assertive">View All Products</button></center>
   </div>
   </div>
   <center><div ng-hide="view=='loading'" ng-show="view=='load'">

@@ -2,15 +2,16 @@
   <ion-content>
    <div class="welcomevertical">
 <font face="Ubuntu" color="#FFFFFF" size="5">
-<p style="line-height: 25vh;">Welcome to Sheep</p>
-<p>To Get Started scroll down to view some product \/</p>
-<p>To Use Wishlist Please register or login use the button below \/</p>
+<p style="line-height: 10vh;">Welcome to Sheep</p>
 </font>
+</center>
+<img src="https://dl.dropboxusercontent.com/u/108136823/sheep_cute%20copy.png" style="height:25%" >
+<center>
 <center><div ng-hide="view=='login'">
-<button class="button button-assertive" ng-click="loginLink()">
+<button class="button button-assertive" ng-click="loginLink()" style="width: 46vw;">
   Login
 </button>
-<button class="button button-balanced" ng-click="registerLink()">
+<button class="button button-balanced" ng-click="registerLink()" style="width: 46vw;">
   Register
 </button>
 </div></center>
@@ -19,31 +20,32 @@
 Welcome Back {{username}}
 
 </font>
-</center>
-<img src="/res/screens/android/sheep_cute copy.png" style="height:25%" >
+<p></p>
+<button class="button button-assertive" ng-click="logoutLink()" ng-show="view=='login'" style="width: 92vw;">
+Logout
+</button>
+
 </div>
 
-
-<center>
-<font face="Ubuntu" color="#FF0000" size="5"  ng-hide="load=='loading'">
+<!-- <font face="Ubuntu" color="#FF0000" size="5"  ng-hide="load=='loading'">
 Loading Please Wait...
 </font>
 </center>
     <ion-list>
-      <ion-item class="item item-thumbnail-left" collection-repeat="playlist in products" collection-item-width="'100%'" collection-item-height="100" href="#/tab/playlist/{{playlist.barcode}}" ng-style="{ 'width' : '101%'}"> 
+      <ion-item class="item item-thumbnail-left" collection-repeat="playlist in products" collection-item-width="'100%'" collection-item-height="100" href="#/tab/playlist/{{playlist.barcode}}" ng-style="{ 'width' : '101%'}">  -->
       <!-- ng-repeat="playlist in friends" href="#/tab/playlist/{{playlist.barcode}}" class="item item-thumbnail-left" -->
       
-        <img class="productImage" src="{{playlist.imageURL}}">
-        <h2>{{playlist.productName}}</h2>
+<!--         <img class="productImage" src="{{playlist.imageURL}}">
+        <h2>{{playlist.productName}}</h2> -->
         <!-- <p>{{playlist.promoString}}</p> -->
+<!-- 
+        <p>Price : {{playlist.price}}<b ng-if="playlist.discountPercent!=null">-{{playlist.discountPercent}}%={{playlist.price-(playlist.price*playlist.discountPercent/100)}}</b></p>
+ -->
 
-        <p>Price : {{playlist.price}}<!-- <b ng-if="playlist.discountPercent!=null">-{{playlist.discountPercent}}%={{playlist.price-(playlist.price*playlist.discountPercent/100)}}</b> --></p>
-
-
-
+<!-- 
 
       </ion-item>
-    </ion-list>
+    </ion-list> -->
 
   </ion-content>
 </ion-view>

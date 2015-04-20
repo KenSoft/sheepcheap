@@ -277,7 +277,7 @@ angular.module('starter.services', [])
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    barcode:data.barcode,
+                    barcode:data,
                     quantity:quantity
                 }
             })
@@ -311,7 +311,7 @@ angular.module('starter.services', [])
           console.log("GetAll");
             $http({
                 method: 'GET',
-                url:'http://sheepcheap.cloudapp.net:3000/api/products?filter[limit]=500'
+                url:'http://sheepcheap.cloudapp.net:3000/api/products'
             })
             .success(function(data) {
                 console.log(data);

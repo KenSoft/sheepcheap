@@ -4,32 +4,59 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view title="Search">
+<ion-view title="View Products">
   <ion-content has-header="true" padding="true">
-
+  <center><div ng-hide="load=='load'" ng-show="load=='loading'">
+<font face="Ubuntu" color="#FF0000" size="5">
+Loading Please Wait...
+</font>
+</div></center>
   
-<ion-item ng-repeat="friend in friends">
-  <p>{{friend.productName}}</p>
-  <p>Price {{friend.price}} Baht By {{friend.store}}</p>
-  <center><img src="{{friend.imageURL}}"></center>
+<ion-item ng-if="Lotus[0]&&BigC[0]" ng-repeat="friend in Lotus" class="col col-50" style="display: inline-block;height:75vh;">
+  <center><p style="font-size:20px;line-height: 30px;">{{friend.store}}</p></center>
+  <p style="font-size:20px;line-height: 20px;">{{friend.productName}}</p>
+  <center><img style="height:150px;width:150px;" src="{{friend.imageURL}}"></center>
   <center>
+  <p style="font-size:50px;line-height: 50px;">{{friend.price}} ฿</p>
+  </center>
+</ion-item>
+<ion-item ng-if="Lotus[0]&&BigC[0]" ng-repeat="friend in BigC" class="col col-50" style="display: inline-block;height:75vh;">
+  <center><p style="font-size:20px;line-height: 30px;">{{friend.store}}</p></center>
+  <p style="font-size:20px;line-height: 20px;">{{friend.productName}}</p>
+  <center><img style="height:150px;width:150px;" src="{{friend.imageURL}}"></center>
+  <center>
+  <p style="font-size:50px;line-height: 50px;">{{friend.price}} ฿</p>
+  </center>
+</ion-item>
+<ion-item ng-if="!Lotus[0]" ng-repeat="friend in BigC" class="col col-100" style="display: inline-block;height:75vh;">
+  <center><p style="font-size:20px;line-height: 30px;">{{friend.store}}</p></center>
+  <p style="font-size:20px;line-height: 20px;">{{friend.productName}}</p>
+  <center><img style="height:150px;width:150px;" src="{{friend.imageURL}}"></center>
+  <center>
+  <p style="font-size:50px;line-height: 50px;">{{friend.price}} ฿</p>
+  </center>
+</ion-item>
+<ion-item ng-if="!BigC[0]" ng-repeat="friend in Lotus" class="col col-100" style="display: inline-block;height:75vh;">
+  <center><p style="font-size:20px;line-height: 30px;">{{friend.store}}</p></center>
+  <p style="font-size:20px;line-height: 20px;">{{friend.productName}}</p>
+  <center><img style="height:150px;width:150px;" src="{{friend.imageURL}}"></center>
+  <center>
+  <p style="font-size:50px;line-height: 50px;">{{friend.price}} ฿</p>
   </center>
 </ion-item>
 <br><br>
 <center>
 <div ng-hide="view=='login'">
-        Please 
-      <button class="button button-assertive" ng-click="loginLink2()">
+      <p style="font-size:20px;line-height: 20px;">To Use Wishlist</p>
+      <button class="button button-assertive" ng-click="loginLink2()" style="display:inline-block;width:46vw">
         Login
       </button>
-      Or
-      <button class="button button-balanced" ng-click="registerLink2()">
+      <button class="button button-balanced" ng-click="registerLink2()" style="display:inline-block;width:46vw">
         Register
       </button>
-      To use Wishlist
 </div>
 
-<button ng-show="friends.length > 0 && view=='login'" class="button button-assertive" ng-click="addToWish(friends[0])" ng-show="view=='login'">
+<button ng-show="view=='login'" class="button button-assertive" ng-click="addToWish()" ng-show="view=='login'" style="display:inline-block;width:92vw">
     Add To Wish List
   </button>
 </center>
